@@ -24,14 +24,27 @@ var questionsArray = [
     }
 ]
 
+// Track game progress and score
+
+var state = {
+    questions: [],
+    currentQuestion: 0,
+    score: 0
+}
+
+// functions for updating state during game progress
+
+var loadQuestion = function(state){
+
+}
+
 // 2 - add function to render the answers for each question = add element to DOM
 
-var renderAnswers = function(question, questionIndex){ // element = DOM element that will store the new construct
-    var itemsHTML = question.answers.map(function(newItem) {    // map() = new array
-        // return '<span>' + newItem + ' - index: ' + $.inArray(newItem, answerList.answers) + '</span><br/>'
+var renderAnswers = function (question, questionIndex) { // element = DOM element that will store the new construct
+    var itemsHTML = question.answers.map(function (newItem) {    // map() = new array
         var answerNumber = '_Q' + questionIndex + '_Answer' + $.inArray(newItem, question.answers)
         return '<input type="radio" name="' + answerNumber + '" id="' + answerNumber + ' />' +
-        '<label for="' + answerNumber + '">' + newItem + '</label><br/>' 
+            '<label for="' + answerNumber + '">' + newItem + '</label><br/>'
     });
     // return constructed items to main loop
     return itemsHTML;
@@ -39,18 +52,28 @@ var renderAnswers = function(question, questionIndex){ // element = DOM element 
 
 
 // 2 - add function to render the state = add element to DOM - based on index - retrieve values from the question array
+// old quizz function
 
-var renderQuizz = function(questionsArray, index, element){ // element = DOM element that will store the new construct -fieldset - .js-question-fieldset
-    //var questionHTML = '<div id="questionnumber">question text</div><legend>Question Number:</legend>questionsArray.text;
+/*var renderQuizz = function (currentQuestion, index, element) { // element = DOM element that will store the new construct -fieldset - .js-question-fieldset
+    console.log(element);
+    //var questionHTML = 
     //console.log(index);
-    var answersHTML = renderAnswers(questionsArray,index);
+    var answersHTML = renderAnswers(currentQuestion, index);
     //console.log("question Text: ",questionHTML);
-    console.log("Answers: ",answersHTML);
+    console.log("Answers: ", answersHTML);
     // insert constructed items
     var itemsHTML = answersHTML
     element.html(itemsHTML); // overwrite element existing html with itemsHTML
 
     // use join and replace ',' to build answer list
+}*/
+
+var renderQuiz = function (questionsArray, currentQuestion, targetElement) {
+    var questionHTML = '<div id="_Q' + currentQuestion + '_text">' + questionsArray[currentQuestion].text + '</div><legend>Question Number: ' + currentQuestion + ' of' + questionsArray.length + '</legend>';
+    var answersHTML = renderAnswers(questionsArray[currentQuestion], currentQuestion);
+    // insert constructed items
+    var itemsHTML = questionHTML + answersHTML;
+    targetElement.html(itemsHTML); // overwrite element existing html with itemsHTML
 }
 
 // Loop through question array
@@ -63,7 +86,7 @@ var renderQuizz = function(questionsArray, index, element){ // element = DOM ele
 // 1. Render the initial state = item 0 of the question array
 // 2. write function - on submit move to next question
 
-$(function(){
+$(function () {
     $('.nojs-warning').remove();
-    renderQuizz(questionsArray[0],0,$('.js-question-fieldset'));
+    renderQuiz(questionsArray, 0, $('.js-question-fieldset'));
 })
