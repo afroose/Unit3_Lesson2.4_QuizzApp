@@ -30,7 +30,7 @@ var renderAnswers = function(question, questionIndex){ // element = DOM element 
     var itemsHTML = question.answers.map(function(newItem) {    // map() = new array
         // return '<span>' + newItem + ' - index: ' + $.inArray(newItem, answerList.answers) + '</span><br/>'
         var answerNumber = '_Q' + questionIndex + '_Answer' + $.inArray(newItem, question.answers)
-        return '<input type="radio" name="' + answerNumber + '" id="' + answerNumber + '" />' +
+        return '<input type="radio" name="' + answerNumber + '" id="' + answerNumber + ' />' +
         '<label for="' + answerNumber + '">' + newItem + '</label><br/>' 
     });
     // return constructed items to main loop
