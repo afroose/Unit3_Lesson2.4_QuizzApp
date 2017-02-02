@@ -9,7 +9,10 @@
 //      c. Valid answer: boolean
 //      d. extra question (editor)
 
-var questionsArray = [
+// Track game progress and score
+
+var state = {
+    questions: [
     {
         text: "Which one is green",
         answers: ["hulk", "Iron Man"],
@@ -22,20 +25,15 @@ var questionsArray = [
         correct: 1, // 0 = hulk, 1 = iron man
         result: false
     }
-]
-
-// Track game progress and score
-
-var state = {
-    questions: [],
+    ],
     currentQuestion: 0,
     score: 0
 }
 
 // functions for updating state during game progress
 
-var loadQuestion = function(state){
-
+var loadQuestion = function(state,element){
+    renderQuiz(state, state.currentQuestion, element);
 }
 
 // 2 - add function to render the answers for each question = add element to DOM
@@ -68,9 +66,9 @@ var renderAnswers = function (question, questionIndex) { // element = DOM elemen
     // use join and replace ',' to build answer list
 }*/
 
-var renderQuiz = function (questionsArray, currentQuestion, targetElement) {
-    var questionHTML = '<div id="_Q' + currentQuestion + '_text">' + questionsArray[currentQuestion].text + '</div><legend>Question Number: ' + currentQuestion + ' of' + questionsArray.length + '</legend>';
-    var answersHTML = renderAnswers(questionsArray[currentQuestion], currentQuestion);
+var renderQuiz = function (state, currentQuestion, targetElement) {
+    var questionHTML = '<div id="_Q' + currentQuestion + '_text">' + state.questions[currentQuestion].text + '</div><legend>Question Number: ' + currentQuestion + ' of' + state.questions.length + '</legend>';
+    var answersHTML = renderAnswers(state.questions[currentQuestion], currentQuestion);
     // insert constructed items
     var itemsHTML = questionHTML + answersHTML;
     targetElement.html(itemsHTML); // overwrite element existing html with itemsHTML
@@ -86,7 +84,8 @@ var renderQuiz = function (questionsArray, currentQuestion, targetElement) {
 // 1. Render the initial state = item 0 of the question array
 // 2. write function - on submit move to next question
 
-$(function () {
+$(function () { // callback function
     $('.nojs-warning').remove();
-    renderQuiz(questionsArray, 0, $('.js-question-fieldset'));
+    // load first question - from state array state/html element to update
+    loadQuestion(state, $('.js-question-fieldset'));
 })
