@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Super Hero Quizz</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+  <div class="container">  
+    <!-- Insert basic form code here -->    
+    
+    <form id="hero-quizz-form"  class='quizz-form' action="/some-server-endpoint" method='post'>
+      <fieldset name="question-fieldset" class="js-question-fieldset">
+        <div id="questionnumber">question text</div>
+        <legend>Question Number:</legend>
+        <input type="radio" name="answer-number" id="answer-number" />
+        <label for="answer-number">answer-number-1</label><br/>
+      </fieldset>      
+      <button type="submit">Next Question</button>
+    </form>
+
+  </div>
+
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
