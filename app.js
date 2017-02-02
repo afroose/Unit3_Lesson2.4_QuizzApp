@@ -64,5 +64,6 @@ var renderQuizz = function(questionsArray, index, element){ // element = DOM ele
 // 2. write function - on submit move to next question
 
 $(function(){
+    $('.nojs-warning').remove();
     renderQuizz(questionsArray[0],0,$('.js-question-fieldset'));
 })
