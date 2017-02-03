@@ -1,13 +1,15 @@
 // 1. object structure for quizz app = step 1 - Single state object - questionsArray
 
-// 1. Question number
+// I.   Question array
 //      a. Question Text
 //      b. Possible answers
 //          1. Answer 1
 //          ...
 //          4. Answer 4
-//      c. Valid answer: boolean
-//      d. extra question (editor)
+//      c. Valid answer: answer index from answer array
+//      d. result: boolean - default = false
+// II.  Current question = position in quizz
+// III. Score
 
 // Track game progress and score
 
@@ -30,18 +32,22 @@ var state = {
     score: 0
 }
 
-// functions for updating state during game progress
+// 2 - functions for updating state during game progress
 
 var loadQuestion = function(state,element){
     renderQuiz(state, state.currentQuestion, element);
 }
 
-// 2 - add function to render the answers for each question = add element to DOM
+var checkQuestion = function(state,selectedAnswer){
+
+}
+
+// 3 - add function to render the answers for each question = add element to DOM
 
 var renderAnswers = function (question, questionIndex) { // element = DOM element that will store the new construct
     var itemsHTML = question.answers.map(function (newItem) {    // map() = new array
         var answerNumber = '_Q' + questionIndex + '_Answer' + $.inArray(newItem, question.answers)
-        return '<input type="radio" name="' + answerNumber + '" id="' + answerNumber + ' />' +
+        return '<input type="radio" name="_Q' + questionIndex + '" id="' + answerNumber + '" value="' + $.inArray(newItem, question.answers) + '" />' +
             '<label for="' + answerNumber + '">' + newItem + '</label><br/>'
     });
     // return constructed items to main loop
@@ -49,7 +55,7 @@ var renderAnswers = function (question, questionIndex) { // element = DOM elemen
 }
 
 
-// 2 - add function to render the state = add element to DOM - based on index - retrieve values from the question array
+// 4 - add function to render the state = add element to DOM - based on index - retrieve values from the question array
 // old quizz function
 
 /*var renderQuizz = function (currentQuestion, index, element) { // element = DOM element that will store the new construct -fieldset - .js-question-fieldset
@@ -86,6 +92,22 @@ var renderQuiz = function (state, currentQuestion, targetElement) {
 
 $(function () { // callback function
     $('.nojs-warning').remove();
+
     // load first question - from state array state/html element to update
-    loadQuestion(state, $('.js-question-fieldset'));
+    loadQuestion(state, $('.js-question-fieldset'));    
+
+//  Event Listener(s) to capture the added element, then create element (call addItem and renderList)
+//  Use jQuery - check form class for submit
+
+    $('#hero-quizz-form').submit(function (event) {
+        event.preventDefault(); // do not submit yet
+        // add triggered functions
+        // check function - the answer selected has to match the "correct answer" from the question array
+        // score function
+        // load function - render next question
+        //addItem(state, $('#shopping-list-entry').val());
+        //renderList(state,$('.shopping-list'));
+        alert($('input[type=radio]:checked', '#hero-quizz-form').val());
+        alert("test");
+    });
 })
