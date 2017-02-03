@@ -72,11 +72,13 @@ var renderAnswers = function (question, questionIndex) { // element = DOM elemen
 }*/
 
 var renderQuiz = function (state, currentQuestion, targetElement) {
-    var questionHTML = '<div id="_Q' + currentQuestion + '_text">' + state.questions[currentQuestion].text + '</div><legend>Question Number: ' + currentQuestion + ' of' + state.questions.length + '</legend>';
+    var legendHTML = '<legend>Question Number: ' + currentQuestion + ' of' + state.questions.length + '</legend>';
+    var questionHTML = '<div id="_Q' + currentQuestion + '_text">' + state.questions[currentQuestion].text + '</div>';
     var answersHTML = renderAnswers(state.questions[currentQuestion], currentQuestion);
     // insert constructed items
-    var itemsHTML = questionHTML + answersHTML;
-    targetElement.html(itemsHTML); // overwrite element existing html with itemsHTML
+    $(targetElement).find('.js-legend-text').html(legendHTML); // overwrite element existing html with itemsHTML - legend - question counter
+    $(targetElement).find('.js-question-text').html(questionHTML); // overwrite element existing html with itemsHTML - question text
+    $(targetElement).find('.js-answer-text').html(answersHTML); // overwrite element existing html with itemsHTML - answers
 }
 
 // Loop through question array

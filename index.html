@@ -16,10 +16,12 @@
 
     <form id="hero-quizz-form"  class='quizz-form' action="/some-server-endpoint" method='post'>
       <fieldset name="question-fieldset" class="js-question-fieldset">
-        <div id="questionnumber">question text</div>
-        <legend>Question Number:</legend>
-        <input type="radio" name="answer-number" id="answer-number" />
-        <label for="answer-number">answer-number-1</label><br/>
+        <legend class="js-legend-text">Question Number:</legend>
+        <div id="question-text" class="js-question-text">question text</div>
+        <div class="js-answer-text">
+          <input type="radio" name="answer-number" id="answer-number" />
+          <label for="answer-number">answer-number-1</label><br/>
+        </div>
       </fieldset>      
       <button type="submit">Next Question</button>
     </form>
