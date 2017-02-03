@@ -54,7 +54,6 @@ var renderAnswers = function (question, questionIndex) { // element = DOM elemen
     return itemsHTML;
 }
 
-
 // 4 - add function to render the state = add element to DOM - based on index - retrieve values from the question array
 // old quizz function
 
