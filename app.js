@@ -55,7 +55,7 @@ var checkQuestion = function(state,selectedAnswer){
 }
 
 var showResults = function (state, targetElement) {
-    var legendHTML = '<legend>End of Eroes Quiz</legend>';
+    var legendHTML = '<legend> End of Heroes Quiz </legend>';
     var questionHTML = '<div id="_Qend_text">So, how well did you do?</div>';
     var answersHTML = '<div id="_Qend_results">You got ' + state.score + ' correct out of ' + state.questions.length + ' questions.</div>';
     var submitHTML = 'Try again';
@@ -88,7 +88,7 @@ var renderAnswers = function (question, questionIndex) { // element = DOM elemen
 
 var renderQuiz = function (state, currentQuestion, targetElement) {
     var questionNumber = currentQuestion + 1;
-    var legendHTML = '<legend>Question Number: ' + questionNumber + ' of ' + state.questions.length + '</legend>';
+    var legendHTML = '<legend> Question Number: ' + questionNumber + ' of ' + state.questions.length + ' </legend>';
     var questionHTML = '<div id="_Q' + currentQuestion + '_text">' + state.questions[currentQuestion].text + '</div>';
     var answersHTML = renderAnswers(state.questions[currentQuestion], currentQuestion);
     var submitHTML = 'Next Question';
