@@ -26,6 +26,12 @@ var state = {
         answers: ["hulk", "Iron Man"],
         correct: 1, // 0 = hulk, 1 = iron man
         result: false
+    },
+    {
+        text: "Which one is blue",
+        answers: ["hulk", "Iron Man", "captain America"],
+        correct: 2, // 0 = hulk, 1 = iron man, 2 = captain America
+        result: false
     }
     ],
     currentQuestion: 0,
@@ -39,7 +45,31 @@ var loadQuestion = function(state,element){
 }
 
 var checkQuestion = function(state,selectedAnswer){
+    var currentIter = state.currentQuestion;
+    if ( selectedAnswer === state.questions[currentIter].correct){
+        state.questions[currentIter].result = true;
+        state.score++;
+    }
+    state.currentQuestion++;
+    //alert(state.score);
+}
 
+var showResults = function (state, targetElement) {
+    var legendHTML = '<legend>End of Eroes Quiz</legend>';
+    var questionHTML = '<div id="_Qend_text">So, how well did you do?</div>';
+    var answersHTML = '<div id="_Qend_results">You got ' + state.score + ' correct out of ' + state.questions.length + ' questions.</div>';
+    var submitHTML = 'Try again';
+    // insert constructed items
+    $(targetElement).find('.js-legend-text').html(legendHTML); // overwrite element existing html with legendHTML - legend - question counter
+    $(targetElement).find('.js-question-text').html(questionHTML); // overwrite element existing html with questionHTML - question text
+    $(targetElement).find('.js-answer-text').html(answersHTML); // overwrite element existing html with answersHTML - answers
+    $(targetElement).parent().find('.js-submit').html(submitHTML); // overwrite element existing html with submitHTML - button text
+    // reset state array to initial state to restart game    
+    state.score = 0;
+    state.currentQuestion = 0;
+    for (var i = 0; i < state.questions.length; i++){
+        state.questions[i].result = false;
+    }
 }
 
 // 3 - add function to render the answers for each question = add element to DOM
@@ -55,30 +85,18 @@ var renderAnswers = function (question, questionIndex) { // element = DOM elemen
 }
 
 // 4 - add function to render the state = add element to DOM - based on index - retrieve values from the question array
-// old quizz function
-
-/*var renderQuizz = function (currentQuestion, index, element) { // element = DOM element that will store the new construct -fieldset - .js-question-fieldset
-    console.log(element);
-    //var questionHTML = 
-    //console.log(index);
-    var answersHTML = renderAnswers(currentQuestion, index);
-    //console.log("question Text: ",questionHTML);
-    console.log("Answers: ", answersHTML);
-    // insert constructed items
-    var itemsHTML = answersHTML
-    element.html(itemsHTML); // overwrite element existing html with itemsHTML
-
-    // use join and replace ',' to build answer list
-}*/
 
 var renderQuiz = function (state, currentQuestion, targetElement) {
-    var legendHTML = '<legend>Question Number: ' + currentQuestion + ' of' + state.questions.length + '</legend>';
+    var questionNumber = currentQuestion + 1;
+    var legendHTML = '<legend>Question Number: ' + questionNumber + ' of ' + state.questions.length + '</legend>';
     var questionHTML = '<div id="_Q' + currentQuestion + '_text">' + state.questions[currentQuestion].text + '</div>';
     var answersHTML = renderAnswers(state.questions[currentQuestion], currentQuestion);
+    var submitHTML = 'Next Question';
     // insert constructed items
-    $(targetElement).find('.js-legend-text').html(legendHTML); // overwrite element existing html with itemsHTML - legend - question counter
-    $(targetElement).find('.js-question-text').html(questionHTML); // overwrite element existing html with itemsHTML - question text
-    $(targetElement).find('.js-answer-text').html(answersHTML); // overwrite element existing html with itemsHTML - answers
+    $(targetElement).find('.js-legend-text').html(legendHTML); // overwrite element existing html with legendHTML - legend - question counter
+    $(targetElement).find('.js-question-text').html(questionHTML); // overwrite element existing html with questionHTML - question text
+    $(targetElement).find('.js-answer-text').html(answersHTML); // overwrite element existing html with answersHTML - answers
+    $(targetElement).parent().find('.js-submit').html(submitHTML); // overwrite element existing html with submitHTML - button text
 }
 
 // Loop through question array
@@ -104,11 +122,15 @@ $(function () { // callback function
         event.preventDefault(); // do not submit yet
         // add triggered functions
         // check function - the answer selected has to match the "correct answer" from the question array
-        // score function
-        // load function - render next question
-        //addItem(state, $('#shopping-list-entry').val());
-        //renderList(state,$('.shopping-list'));
-        alert($('input[type=radio]:checked', '#hero-quizz-form').val());
-        alert("test");
+        var selectedAnswer = parseInt($('input[type=radio]:checked', '#hero-quizz-form').val()); // use parseInt else value returned is string
+        if(!isNaN(selectedAnswer)){ checkQuestion(state, selectedAnswer);}; 
+        // Check question number vs length of array question - load new questions or show reults
+        var questionNumber = state.currentQuestion + 1; 
+        if(questionNumber <= state.questions.length){
+            // load function - render next question
+            loadQuestion(state, $('.js-question-fieldset'));  
+        } else {
+            showResults(state, $('.js-question-fieldset'));  
+        }
     });
 })
