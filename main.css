@@ -6,16 +6,19 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
-button, input[type="text"] {
-  padding: 5px;
+header {
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: red;
+  color: white;
+  display: block;
+  text-align: center;
+  padding: 15px;
 }
 
-button:hover {
-  cursor: pointer;
-}
-
-#shopping-list-item {
-  width: 250px;
+main {
+  padding-top: 100px;
 }
 
 .container {
@@ -23,25 +26,36 @@ button:hover {
   margin: 0 auto;
 }
 
-.shopping-list {
-  list-style: none;
-  padding-left: 0;
+button {
+  cursor: pointer;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-left: 30px;
+  padding: 8px;  
 }
 
-.shopping-list > li {
-  margin-bottom: 20px;
-  border: 1px solid grey;
-  padding: 20px;
+.js-question-fieldset {
+  border: 1px solid black;
+  border-radius: 15px;
+  margin: 25px;
+  padding: 25px;
 }
 
-.shopping-item {
-  display: block;
-  color: grey;
-  font-style: italic;
-  font-size: 20px;
-  margin-bottom: 15px;
+.js-question-text {
+  color: blue;
+  font-weight: bold;
 }
 
-.shopping-item__checked {
-  text-decoration: line-through;
+.js-answer-text {
+  margin: 10px;
+  padding: 10px;
+}
+input[type="radio"] {
+  margin: 10px;
+}
+
+legend {
+  color: blue;
+  padding: 5px;
+  font-weight: bold;
 }

@@ -7,27 +7,37 @@
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
 </head>
-<body>
+<body>  
+
+  <header>
+	 <div class="row orange">
+		<div class="col-12">
+      <div><h1>Marvel Super Hero Quizz</h1></div>
+		</div>
+	 </div>  
+  </header>
+
+  <main>
     <div class="container">
-    <!-- Insert basic form code here -->    
-    <div class="nojs-warning">
+      <!-- Insert basic form code here -->    
+      <div class="nojs-warning">
         <p class="warning-text">This quiz requires JavaScript to run. Please make sure you have <a href="http://enable-javascript.com">enabled JavaScript</a> to play. If JavaScript is on and you still see this message, please <a href="#">contact Arnaud</a>.</p>
+      </div>
+
+      <form id="hero-quizz-form"  class='js-quizz-form' action="/some-server-endpoint" method='post'>
+        <fieldset name="question-fieldset" class="js-question-fieldset">
+         <legend class="js-legend-text">Question Number:</legend>
+          <div id="question-text" class="js-question-text">question text</div>
+          <div class="js-answer-text">
+            <input type="radio" name="answer-number" id="answer-number" />
+            <label for="answer-number">answer-number-1</label><br/>
+          </div>
+        </fieldset>      
+        <button type="submit" class="js-submit">Next Question</button>
+      </form>
+
     </div>
-
-    <form id="hero-quizz-form"  class='js-quizz-form' action="/some-server-endpoint" method='post'>
-      <fieldset name="question-fieldset" class="js-question-fieldset">
-        <legend class="js-legend-text">Question Number:</legend>
-        <div id="question-text" class="js-question-text">question text</div>
-        <div class="js-answer-text">
-          <input type="radio" name="answer-number" id="answer-number" />
-          <label for="answer-number">answer-number-1</label><br/>
-        </div>
-      </fieldset>      
-      <button type="submit" class="js-submit">Next Question</button>
-    </form>
-
-  </div>
-
+  </main>
 
   <script
   src="https://code.jquery.com/jquery-3.1.1.min.js"

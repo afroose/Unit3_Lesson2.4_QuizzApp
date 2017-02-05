@@ -15,22 +15,67 @@
 
 var state = {
     questions: [
-    {
-        text: "Which one is green",
-        answers: ["hulk", "Iron Man"],
-        correct: 0, // 0 = hulk, 1 = iron man
+    {   // 0
+        text: "Who was a founder or Marvel Comics?",
+        answers: ["Jack Kirby", "Steve Lee", "Stan Ditko", "Daniel Roose"],
+        correct: 0, // 0 = Jack Kirby
         result: false
     },
-    {
-        text: "Which one is red",
-        answers: ["hulk", "Iron Man"],
-        correct: 1, // 0 = hulk, 1 = iron man
+    {   // 1
+        text: "Which of the following is a quote attributed to Spiderman?",
+        answers: ["With awesome power comes some responsibility",
+        "What power? I don't want no responsibility!",
+        "With great power come great responsibilities.",
+        "With no power, there are no responsibilities."],
+        correct: 2, // 2 = With great power come great responsibilities.
         result: false
     },
-    {
-        text: "Which one is blue",
-        answers: ["hulk", "Iron Man", "captain America"],
-        correct: 2, // 0 = hulk, 1 = iron man, 2 = captain America
+    {   // 2
+        text: "Who is Peter Parker's first love?",
+        answers: ["Kitty Pryde", "Betty Brant", "Mary Jane", "Gwen Stacy"],
+        correct: 3, // 3 = Gwen Stacy
+        result: false
+    },
+    {   // 4
+        text: "Who is part of the Marvel Illuminati?",
+        answers: ["Doctor Strange", "Mr. Fantastic", "Dr. Bruce Banner", "Magneto"],
+        correct: 0, // 0 = Doctor Strange
+        result: false
+    },
+    {   // 5
+        text: "Who wears the Eye of Agamoto?",
+        answers: ["Iron Man", "The Ancient One", "Baron Mordo", "Dr. Strange"],
+        correct: 3, // 3 = Doctor Strange
+        result: false
+    },
+    {   // 6
+        text: "Who is the son of Odin?",
+        answers: ["Thor", "Hulk", "Loki", "Heimdall"],
+        correct: 0, // 0 = Thor
+        result: false
+    },
+    {   // 7
+        text: "Who is a member of the Fantastic Four?",
+        answers: ["Tony Stark", "Johnny Storm", "Bruce Banner", "Steven Strange"],
+        correct: 1, // 1 = Johnny Storm
+        result: false
+    },
+    {   // 8
+        text: "What were Wolverine's claws made of originally?",
+        answers: ["Iron", "Bone", "Adamantium", "He did not have claws when he was born!"],
+        correct: 1, // 1 = bone
+        result: false
+    },
+    {   // 9
+        text: "What makes Red Hulk stronger?",
+        answers: ["Anger", "Cold", "Electicity", "Heat"],
+        correct: 3, // 3 = heat
+        result: false
+    },
+    {   // 10
+        text: "What is Hulk's real name?",
+        answers: ["Peter Parker", "Tony Stark", "Bruce Banner", "Viktor Von Doom"],
+        correct: 2, // 2 = Bruce Banner
         result: false
     }
     ],
@@ -77,7 +122,7 @@ var showResults = function (state, targetElement) {
 var renderAnswers = function (question, questionIndex) { // element = DOM element that will store the new construct
     var itemsHTML = question.answers.map(function (newItem) {    // map() = new array
         var answerNumber = '_Q' + questionIndex + '_Answer' + $.inArray(newItem, question.answers)
-        return '<input type="radio" name="_Q' + questionIndex + '" id="' + answerNumber + '" value="' + $.inArray(newItem, question.answers) + '" />' +
+        return '<input type="radio" name="_Q' + questionIndex + '" id="' + answerNumber + '" value="' + $.inArray(newItem, question.answers) + '" required  />' +
             '<label for="' + answerNumber + '">' + newItem + '</label><br/>'
     });
     // return constructed items to main loop
