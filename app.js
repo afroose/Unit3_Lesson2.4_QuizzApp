@@ -22,66 +22,71 @@ var state = {
         result: false
     },
     {   // 1
-        text: "Which of the following is a quote attributed to Spiderman?",
+        text: "Which of the following is a quote attributed to Uncle Ben?",
         answers: ["With awesome power comes some responsibility",
         "What power? I don't want no responsibility!",
         "With great power come great responsibilities.",
         "With no power, there are no responsibilities."],
         correct: 2, // 2 = With great power come great responsibilities.
         result: false
-    },
-    {   // 2
-        text: "Who is Peter Parker's first love?",
-        answers: ["Kitty Pryde", "Betty Brant", "Mary Jane", "Gwen Stacy"],
-        correct: 3, // 3 = Gwen Stacy
-        result: false
-    },
-    {   // 4
-        text: "Who is part of the Marvel Illuminati?",
-        answers: ["Doctor Strange", "Mr. Fantastic", "Dr. Bruce Banner", "Magneto"],
-        correct: 0, // 0 = Doctor Strange
-        result: false
-    },
-    {   // 5
-        text: "Who wears the Eye of Agamoto?",
-        answers: ["Iron Man", "The Ancient One", "Baron Mordo", "Dr. Strange"],
-        correct: 3, // 3 = Doctor Strange
-        result: false
-    },
-    {   // 6
-        text: "Who is the son of Odin?",
-        answers: ["Thor", "Hulk", "Loki", "Heimdall"],
-        correct: 0, // 0 = Thor
-        result: false
-    },
-    {   // 7
-        text: "Who is a member of the Fantastic Four?",
-        answers: ["Tony Stark", "Johnny Storm", "Bruce Banner", "Steven Strange"],
-        correct: 1, // 1 = Johnny Storm
-        result: false
-    },
-    {   // 8
-        text: "What were Wolverine's claws made of originally?",
-        answers: ["Iron", "Bone", "Adamantium", "He did not have claws when he was born!"],
-        correct: 1, // 1 = bone
-        result: false
-    },
-    {   // 9
-        text: "What makes Red Hulk stronger?",
-        answers: ["Anger", "Cold", "Electicity", "Heat"],
-        correct: 3, // 3 = heat
-        result: false
-    },
-    {   // 10
-        text: "What is Hulk's real name?",
-        answers: ["Peter Parker", "Tony Stark", "Bruce Banner", "Viktor Von Doom"],
-        correct: 2, // 2 = Bruce Banner
-        result: false
     }
+    //,
+    // {   // 2
+    //     text: "Who is Peter Parker's first love?",
+    //     answers: ["Kitty Pryde", "Betty Brant", "Mary Jane", "Gwen Stacy"],
+    //     correct: 3, // 3 = Gwen Stacy
+    //     result: false
+    // },
+    // {   // 4
+    //     text: "Who is part of the Marvel Illuminati?",
+    //     answers: ["Doctor Strange", "Mr. Fantastic", "Dr. Bruce Banner", "Magneto"],
+    //     correct: 0, // 0 = Doctor Strange
+    //     result: false
+    // },
+    // {   // 5
+    //     text: "Who wears the Eye of Agamoto?",
+    //     answers: ["Iron Man", "The Ancient One", "Baron Mordo", "Dr. Strange"],
+    //     correct: 3, // 3 = Doctor Strange
+    //     result: false
+    // },
+    // {   // 6
+    //     text: "Who is the son of Odin?",
+    //     answers: ["Thor", "Hulk", "Loki", "Heimdall"],
+    //     correct: 0, // 0 = Thor
+    //     result: false
+    // },
+    // {   // 7
+    //     text: "Who is a member of the Fantastic Four?",
+    //     answers: ["Tony Stark", "Johnny Storm", "Bruce Banner", "Steven Strange"],
+    //     correct: 1, // 1 = Johnny Storm
+    //     result: false
+    // },
+    // {   // 8
+    //     text: "What were Wolverine's claws made of originally?",
+    //     answers: ["Iron", "Bone", "Adamantium", "He did not have claws when he was born!"],
+    //     correct: 1, // 1 = bone
+    //     result: false
+    // },
+    // {   // 9
+    //     text: "What makes Red Hulk stronger?",
+    //     answers: ["Anger", "Cold", "Electicity", "Heat"],
+    //     correct: 3, // 3 = heat
+    //     result: false
+    // },
+    // {   // 10
+    //     text: "What is Hulk's real name?",
+    //     answers: ["Peter Parker", "Tony Stark", "Bruce Banner", "Viktor Von Doom"],
+    //     correct: 2, // 2 = Bruce Banner
+    //     result: false
+    // }
     ],
     currentQuestion: 0,
+    currentQuizState: "startQuiz", // values: startQuiz = start quiz / showQuiz/ IncorrectAnswer / endQuiz
     score: 0
 }
+
+// Quiz functions
+
 
 // 2 - functions for updating state during game progress
 
@@ -97,24 +102,6 @@ var checkQuestion = function(state,selectedAnswer){
     }
     state.currentQuestion++;
     //alert(state.score);
-}
-
-var showResults = function (state, targetElement) {
-    var legendHTML = '<legend> End of Heroes Quiz </legend>';
-    var questionHTML = '<div id="_Qend_text">So, how well did you do?</div>';
-    var answersHTML = '<div id="_Qend_results">You got ' + state.score + ' correct out of ' + state.questions.length + ' questions.</div>';
-    var submitHTML = 'Try again';
-    // insert constructed items
-    $(targetElement).find('.js-legend-text').html(legendHTML); // overwrite element existing html with legendHTML - legend - question counter
-    $(targetElement).find('.js-question-text').html(questionHTML); // overwrite element existing html with questionHTML - question text
-    $(targetElement).find('.js-answer-text').html(answersHTML); // overwrite element existing html with answersHTML - answers
-    $(targetElement).parent().find('.js-submit').html(submitHTML); // overwrite element existing html with submitHTML - button text
-    // reset state array to initial state to restart game    
-    state.score = 0;
-    state.currentQuestion = 0;
-    for (var i = 0; i < state.questions.length; i++){
-        state.questions[i].result = false;
-    }
 }
 
 // 3 - add function to render the answers for each question = add element to DOM
@@ -144,22 +131,33 @@ var renderQuiz = function (state, currentQuestion, targetElement) {
     $(targetElement).parent().find('.js-submit').html(submitHTML); // overwrite element existing html with submitHTML - button text
 }
 
-// Loop through question array
-// for (var i = 0; i < questionsArray.length; i++) {
-//    console.log("array: ", questionsArray[i]); // loop through object
-//    renderQuizz(questionsArray[i],$('.js-question-fieldset'));
-//}
+// loadScreen function - front page
 
-// Steps for the quizz application:
-// 1. Render the initial state = item 0 of the question array
-// 2. write function - on submit move to next question
+var loadScreen = function(state){
+    if (state.currentQuizState === 'startQuiz'){
+        $('#start-section').css('display','block');
+    } else if (state.currentQuizState === 'showQuiz'){
+        $('#question-section').css('display','block');
+    } else if (state.currentQuizState === 'endQuiz'){
+        $('#end-section').css('display','block');
+    }
+}
 
-$(function () { // callback function
-    $('.nojs-warning').remove();
+// event handler - buttons
 
-    // load first question - from state array state/html element to update
-    loadQuestion(state, $('.js-question-fieldset'));    
+// Start page button
+$('.start-quiz-button').click(function (event) {
+    event.preventDefault(); // skip default functionality
+    // Hide start page
+    $('#start-section').css('display','none');
+    // Reset Quiz state to showQuiz
+    state.currentQuizState = 'showQuiz'
+    //Load and show quiz page
+    $('#question-section').css('display','block');
+    loadQuestion(state, $('.js-question-fieldset'));  
+});   
 
+// Quiz submit button
 //  Event Listener(s) to capture the added element, then create element (call addItem and renderList)
 //  Use jQuery - check form class for submit
 
@@ -174,8 +172,31 @@ $(function () { // callback function
         if(questionNumber <= state.questions.length){
             // load function - render next question
             loadQuestion(state, $('.js-question-fieldset'));  
-        } else {
-            showResults(state, $('.js-question-fieldset'));  
+        } else {            
+            // Reset Quiz state to endQuiz
+            state.currentQuizState = 'endQuiz'
+            // Hide quiz page
+            $('#question-section').css('display','none');
+            //Load and show end page
+            $('#end-section').css('display','block');
+            loadScreen(state);
         }
     });
+
+// End page button
+$('.end-quiz-button').click(function (event) {
+    event.preventDefault(); // skip default functionality
+    // Hide end quiz page
+    $('#end-section').css('display','none');
+    // Reset Quiz state to startQuiz
+    state.currentQuizState = 'startQuiz'
+    //Load and show start page
+    loadScreen(state); 
+});   
+
+//==================================
+$(function () { // callback function
+    $('.nojs-warning').remove();
+
+    loadScreen(state);
 })
