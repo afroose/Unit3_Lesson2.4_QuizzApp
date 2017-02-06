@@ -143,6 +143,13 @@ var loadScreen = function(state){
     }
 }
 
+// resetQuiz function - reset quiz to initial state
+
+var resetQuiz    = function(state){       
+    // Reset Quiz state to endQuiz
+    state.currentQuizState = 'endQuiz'
+}
+
 // event handler - buttons
 
 // Start page button
@@ -155,6 +162,23 @@ $('.start-quiz-button').click(function (event) {
     //Load and show quiz page
     $('#question-section').css('display','block');
     loadQuestion(state, $('.js-question-fieldset'));  
+});   
+
+// End page button
+$('.end-quiz-button').click(function (event) {
+    event.preventDefault(); // skip default functionality
+    // Hide end quiz page
+    $('#end-section').css('display','none');
+    // Reset Quiz state to startQuiz
+    state.currentQuizState = 'startQuiz'
+    // reset state array to initial state to restart game    
+    state.score = 0;
+    state.currentQuestion = 0;
+    for (var i = 0; i < state.questions.length; i++){
+        state.questions[i].result = false;
+    }
+    //Load and show start page
+    loadScreen(state); 
 });   
 
 // Quiz submit button
@@ -183,20 +207,8 @@ $('.start-quiz-button').click(function (event) {
         }
     });
 
-// End page button
-$('.end-quiz-button').click(function (event) {
-    event.preventDefault(); // skip default functionality
-    // Hide end quiz page
-    $('#end-section').css('display','none');
-    // Reset Quiz state to startQuiz
-    state.currentQuizState = 'startQuiz'
-    //Load and show start page
-    loadScreen(state); 
-});   
-
 //==================================
 $(function () { // callback function
     $('.nojs-warning').remove();
-
     loadScreen(state);
 })
