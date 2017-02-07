@@ -60,6 +60,9 @@ button {
 input[type="radio"] {
   margin: 10px;
 }
+input[type="radio"][disabled] + label {
+  color:red;
+}
 
 legend {
   color: blue;

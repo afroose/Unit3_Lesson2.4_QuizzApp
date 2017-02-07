@@ -94,13 +94,17 @@ var loadQuestion = function(state,element){
     renderQuiz(state, state.currentQuestion, element);
 }
 
-var checkQuestion = function(state,selectedAnswer){
+var checkQuestion = function(state,selectedAnswer,targetElement){
     var currentIter = state.currentQuestion;
+    // disable radio buttons
+    $('input[type="radio"]').attr('disabled', true);
+    alert("check answer");
     if ( selectedAnswer === state.questions[currentIter].correct){
         state.questions[currentIter].result = true;
         state.score++;
     }
     state.currentQuestion++;
+    $(targetElement).parent().find('.js-feedback-details').html(state.questions[currentIter].result ? 'Correct Answer' : 'Incorrect Answer'); // Hide Submit answer button
     //alert(state.score);
 }
 
@@ -123,12 +127,13 @@ var renderQuiz = function (state, currentQuestion, targetElement) {
     var legendHTML = '<legend> Question Number: ' + questionNumber + ' of ' + state.questions.length + ' </legend>';
     var questionHTML = '<div id="_Q' + currentQuestion + '_text">' + state.questions[currentQuestion].text + '</div>';
     var answersHTML = renderAnswers(state.questions[currentQuestion], currentQuestion);
-    var submitHTML = 'Next Question';
     // insert constructed items
     $(targetElement).find('.js-legend-text').html(legendHTML); // overwrite element existing html with legendHTML - legend - question counter
     $(targetElement).find('.js-question-text').html(questionHTML); // overwrite element existing html with questionHTML - question text
     $(targetElement).find('.js-answer-text').html(answersHTML); // overwrite element existing html with answersHTML - answers
-    $(targetElement).parent().find('.js-submit').html(submitHTML); // overwrite element existing html with submitHTML - button text
+    $(targetElement).parent().find('.js-check-answer').css('display', 'block'); // Show check answer button
+    $(targetElement).parent().find('.js-submit-answer').css('display', 'none'); // Hide Submit answer button
+    $(targetElement).parent().find('.js-feedback-details').html('this is what you see when the question comes up' + state.questions[currentQuestion].text); // Edit Side div content
 }
 
 // loadScreen function - front page
@@ -181,31 +186,41 @@ $('.end-quiz-button').click(function (event) {
     loadScreen(state); 
 });   
 
-// Quiz submit button
+// Quiz Check answer/submit button
 //  Event Listener(s) to capture the added element, then create element (call addItem and renderList)
 //  Use jQuery - check form class for submit
 
-    $('#hero-quizz-form').submit(function (event) {
-        event.preventDefault(); // do not submit yet
-        // add triggered functions
-        // check function - the answer selected has to match the "correct answer" from the question array
-        var selectedAnswer = parseInt($('input[type=radio]:checked', '#hero-quizz-form').val()); // use parseInt else value returned is string
-        if(!isNaN(selectedAnswer)){ checkQuestion(state, selectedAnswer);}; 
-        // Check question number vs length of array question - load new questions or show reults
-        var questionNumber = state.currentQuestion + 1; 
-        if(questionNumber <= state.questions.length){
-            // load function - render next question
-            loadQuestion(state, $('.js-question-fieldset'));  
-        } else {            
-            // Reset Quiz state to endQuiz
-            state.currentQuizState = 'endQuiz'
-            // Hide quiz page
-            $('#question-section').css('display','none');
-            //Load and show end page
-            $('#end-section').css('display','block');
-            loadScreen(state);
-        }
-    });
+// Check answer button
+$('.js-check-answer').click(function (event) {
+    event.preventDefault(); // do not submit yet
+    // add triggered functions
+    // check function - the answer selected has to match the "correct answer" from the question array
+    var selectedAnswer = parseInt($('input[type=radio]:checked', '#hero-quizz-form').val()); // use parseInt else value returned is string
+    if(!isNaN(selectedAnswer)){checkQuestion(state, selectedAnswer, $('.js-question-fieldset'));}; 
+    // Check question number vs length of array question - load new questions or show reults
+    var questionNumber = state.currentQuestion + 1; 
+    $(this).css('display', 'none'); 
+    $(this).siblings('.js-submit-answer').css('display', 'block'); // Show submit answer button
+});
+
+// submit answer button
+$('#hero-quizz-form').submit(function (event) {
+    event.preventDefault(); // do not submit yet
+    alert("submit answer");
+    var questionNumber = state.currentQuestion + 1; 
+    if(questionNumber <= state.questions.length){
+        // load function - render next question
+        loadQuestion(state, $('.js-question-fieldset'));  
+    } else {            
+        // Reset Quiz state to endQuiz
+        state.currentQuizState = 'endQuiz'
+        // Hide quiz page
+        $('#question-section').css('display','none');
+        //Load and show end page
+        $('#end-section').css('display','block');
+        loadScreen(state);
+    }
+});
 
 //==================================
 $(function () { // callback function
