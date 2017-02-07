@@ -29,7 +29,7 @@
         <div class="start-section-text">
           <h1>Welcome to the Marvel Comic Heroes Quiz</h1>
           <p>Think you know the Marvel Universe?</p>
-          <p>We designed 10 questions to test your savvy, only 10 questinos. Who needs more?<br/>But beware, you can only make one choice. one click, so be sure and mak it the right one.</p>
+          <p>We designed 10 questions to test your savvy, only 10 questions. Who needs more?<br/>But beware, you have only one choice for each question.<br/>One click and one click only, so be sure and make it the right one.</p>
           <p>If you think you are ready, click the start button, and let's get the chellenge on its way...</p>
           <button class="start-quiz-button">Click to start the Quiz</button>
         </div>
@@ -48,14 +48,18 @@
           <!--Absolute positioning to move visually into fieldset-->
           <div class="js-feedback">
             <p class="js-feedback-evaluation"></p> 
-            <p class="js-feedback-details">Comments about this question</p>
+            <div class="js-feedback-details"></div>
           </div>
           <button type="submit" class="js-submit-answer" style="display: none;">Next Question</button><button class="js-check-answer" style="display: none;">Check Answers</button>
        </form>
       </section>
 
       <section id="end-section" style="display: none;">
-        <p>This is the end screen</p>
+        <div class="end-section-text">
+          <h1>And we are done ...</h1>
+          <p>How well did you do?</p>
+          <p>You got <span class="js-end-score">score</span> questions correct.</p>
+        </div>
         <button class="end-quiz-button">Click to re-start the Quiz</button>
       </section>
     </div>

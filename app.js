@@ -20,18 +20,20 @@ var state = {
         answers: ["Jack Kirby", "Steve Lee", "Stan Ditko", "Daniel Roose"],
         correct: 0, // 0 = Jack Kirby
         result: false,
-        background: "images/marvel-comics-1.jpg"
+        background: "<img src='images/marvel-comics-1.jpg' class='js-feedback-image' alt='Marvel Comics Nber 1' />",
+        detail: "In the 1960s, Jack Kirby and Stanlee co-created many of the Marvel characters, including the Fantastic Four, the X-Men and the Hulk."
 
     },
     {   // 1
         text: "Which of the following is a quote attributed to Uncle Ben?",
         answers: ["With awesome power comes some responsibility",
         "What power? I don't want no responsibility!",
-        "With great power come great responsibilities.",
+        "With great power comes great responsibility.",
         "With no power, there are no responsibilities."],
         correct: 2, // 2 = With great power come great responsibilities.
         result: false,
-        background: "images/uncleBen.jpg"
+        background: "<img src='images/uncleBen.jpg' class='js-feedback-image' alt='Marvel Comics Nber 1' />",
+        detail: "Apparently, Uncle Ben was a fervent admirer of Winston Churchill, who said in 1906 <blockquote>&#8220;Where there is great power there is great responsibility&#8222;</blockquote>"
     }
     //,
     // {   // 2
@@ -101,13 +103,14 @@ var checkQuestion = function(state,selectedAnswer,targetElement){
     var currentIter = state.currentQuestion;
     // disable radio buttons
     $('input[type="radio"]').attr('disabled', true);
-    alert("check answer");
+    // alert("check answer");
     if ( selectedAnswer === state.questions[currentIter].correct){
         state.questions[currentIter].result = true;
         state.score++;
     }
     state.currentQuestion++;
-    $(targetElement).parent().find('.js-feedback-details').html(state.questions[currentIter].result ? 'Correct Answer' : 'Incorrect Answer'); // Hide Submit answer button
+    $(targetElement).parent().find('.js-feedback-evaluation').html( (state.questions[currentIter].result ? 'That was right. ' : 'Sorry, you missed that one. ') + state.score + ' out of ' + state.currentQuestion + ' correct.'); // Hide Submit answer button   
+    $(targetElement).parent().find('.js-feedback-details').html(state.questions[currentIter].detail); // Edit Side div content
     //alert(state.score);
 }
 
@@ -136,7 +139,8 @@ var renderQuiz = function (state, currentQuestion, targetElement) {
     $(targetElement).find('.js-answer-text').html(answersHTML); // overwrite element existing html with answersHTML - answers
     $(targetElement).parent().find('.js-check-answer').css('display', 'block'); // Show check answer button
     $(targetElement).parent().find('.js-submit-answer').css('display', 'none'); // Hide Submit answer button
-    $(targetElement).parent().find('.js-feedback-details').html('this is what you see when the question comes up' + state.questions[currentQuestion].text); // Edit Side div content
+    $(targetElement).parent().find('.js-feedback-evaluation').html("");
+    $(targetElement).parent().find('.js-feedback-details').html(state.questions[currentQuestion].background); // Edit Side div content
 }
 
 // loadScreen function - front page
@@ -147,7 +151,7 @@ var loadScreen = function(state){
     } else if (state.currentQuizState === 'showQuiz'){
         $('#question-section').css('display','block');
     } else if (state.currentQuizState === 'endQuiz'){
-        var scoreHTML = state.score + ' Out of ' + state.questions.length;
+        var scoreHTML = state.score + ' out of ' + state.questions.length;
         renderEndScreen(scoreHTML)
         $('#end-section').css('display','block');
     }
@@ -156,7 +160,7 @@ var loadScreen = function(state){
 // endScreen function
 
 var renderEndScreen = function(scoreHTML){
-    $('#end-section').find('p').html(scoreHTML);
+    $('#end-section').find('.js-end-score').html(scoreHTML);
 }
 
 // event handler - buttons
@@ -210,7 +214,7 @@ $('.js-check-answer').click(function (event) {
 // submit answer button
 $('#hero-quizz-form').submit(function (event) {
     event.preventDefault(); // do not submit yet
-    alert("submit answer");
+    // alert("submit answer");
     var questionNumber = state.currentQuestion + 1; 
     if(questionNumber <= state.questions.length){
         // load function - render next question

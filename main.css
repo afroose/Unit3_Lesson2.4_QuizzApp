@@ -33,8 +33,17 @@ main {
   margin: 0 auto;
   padding: 5px 0px 25px 0px;
 }
-.start-section-text {
+#start-section .start-section-text {
   margin-left: 15px;
+}
+#end-section .end-section-text {
+  margin-left: 15px;
+}
+.js-feedback {
+  padding: 10px;
+}
+.js-feedback-image {
+  height: 180px;
 }
 
 button {
