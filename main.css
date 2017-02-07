@@ -4,6 +4,9 @@
 
 body {
   font-family: 'Roboto', sans-serif;
+  background-image: url(images/marvel-heroes-title-cover-logo-gamoha.jpg);
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 header {
@@ -24,8 +27,14 @@ main {
 .container {
   position: relative;
   max-width: 960px;
-  border: 1px blue solid;
+  min-height: 300px;
+  border: 2px red solid;
+  background-color: white;
   margin: 0 auto;
+  padding: 5px 0px 25px 0px;
+}
+.start-section-text {
+  margin-left: 15px;
 }
 
 button {

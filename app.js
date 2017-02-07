@@ -16,10 +16,12 @@
 var state = {
     questions: [
     {   // 0
-        text: "Who was a founder or Marvel Comics?",
+        text: "Who was a founder of Marvel Comics?",
         answers: ["Jack Kirby", "Steve Lee", "Stan Ditko", "Daniel Roose"],
         correct: 0, // 0 = Jack Kirby
-        result: false
+        result: false,
+        background: "images/marvel-comics-1.jpg"
+
     },
     {   // 1
         text: "Which of the following is a quote attributed to Uncle Ben?",
@@ -28,7 +30,8 @@ var state = {
         "With great power come great responsibilities.",
         "With no power, there are no responsibilities."],
         correct: 2, // 2 = With great power come great responsibilities.
-        result: false
+        result: false,
+        background: "images/uncleBen.jpg"
     }
     //,
     // {   // 2
@@ -144,15 +147,16 @@ var loadScreen = function(state){
     } else if (state.currentQuizState === 'showQuiz'){
         $('#question-section').css('display','block');
     } else if (state.currentQuizState === 'endQuiz'){
+        var scoreHTML = state.score + ' Out of ' + state.questions.length;
+        renderEndScreen(scoreHTML)
         $('#end-section').css('display','block');
     }
 }
 
-// resetQuiz function - reset quiz to initial state
+// endScreen function
 
-var resetQuiz    = function(state){       
-    // Reset Quiz state to endQuiz
-    state.currentQuizState = 'endQuiz'
+var renderEndScreen = function(scoreHTML){
+    $('#end-section').find('p').html(scoreHTML);
 }
 
 // event handler - buttons
