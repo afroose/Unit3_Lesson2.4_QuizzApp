@@ -39,12 +39,6 @@ main {
 #end-section .end-section-text {
   margin-left: 15px;
 }
-.js-feedback {
-  padding: 10px;
-}
-.js-feedback-image {
-  height: 180px;
-}
 
 button {
   cursor: pointer;
@@ -94,4 +88,15 @@ legend {
   width: 400px;
   height: 220px;
   border: 1px solid brown;
+}
+.js-feedback {
+  padding: 10px;
+}
+.js-feedback-details {
+  width: 100%;
+  height: 100%;
+}
+.js-feedback-image {
+  max-width: auto;
+  height: 100%;
 }

@@ -111,6 +111,7 @@ var checkQuestion = function(state,selectedAnswer,targetElement){
     state.currentQuestion++;
     $(targetElement).parent().find('.js-feedback-evaluation').html( (state.questions[currentIter].result ? 'That was right. ' : 'Sorry, you missed that one. ') + state.score + ' out of ' + state.currentQuestion + ' correct.'); // Hide Submit answer button   
     $(targetElement).parent().find('.js-feedback-details').html(state.questions[currentIter].detail); // Edit Side div content
+    $(targetElement).parent().find('.js-feedback-evaluation').show();
     //alert(state.score);
 }
 
@@ -139,7 +140,7 @@ var renderQuiz = function (state, currentQuestion, targetElement) {
     $(targetElement).find('.js-answer-text').html(answersHTML); // overwrite element existing html with answersHTML - answers
     $(targetElement).parent().find('.js-check-answer').css('display', 'block'); // Show check answer button
     $(targetElement).parent().find('.js-submit-answer').css('display', 'none'); // Hide Submit answer button
-    $(targetElement).parent().find('.js-feedback-evaluation').html("");
+    $(targetElement).parent().find('.js-feedback-evaluation').hide();
     $(targetElement).parent().find('.js-feedback-details').html(state.questions[currentQuestion].background); // Edit Side div content
 }
 
