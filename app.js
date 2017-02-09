@@ -35,55 +35,71 @@ var state = {
         background: "<img src='images/uncleBen.jpg' class='js-feedback-image' alt='Marvel Comics Nber 1' />",
         detail: "Apparently, Uncle Ben was a fervent admirer of Winston Churchill, who said in 1906 <blockquote>&#8220;Where there is great power there is great responsibility&#8222;</blockquote>"
     }
-    //,
-    // {   // 2
-    //     text: "Who is Peter Parker's first love?",
-    //     answers: ["Kitty Pryde", "Betty Brant", "Mary Jane", "Gwen Stacy"],
-    //     correct: 3, // 3 = Gwen Stacy
-    //     result: false
-    // },
-    // {   // 4
-    //     text: "Who is part of the Marvel Illuminati?",
-    //     answers: ["Doctor Strange", "Mr. Fantastic", "Dr. Bruce Banner", "Magneto"],
-    //     correct: 0, // 0 = Doctor Strange
-    //     result: false
-    // },
-    // {   // 5
-    //     text: "Who wears the Eye of Agamoto?",
-    //     answers: ["Iron Man", "The Ancient One", "Baron Mordo", "Dr. Strange"],
-    //     correct: 3, // 3 = Doctor Strange
-    //     result: false
-    // },
-    // {   // 6
-    //     text: "Who is the son of Odin?",
-    //     answers: ["Thor", "Hulk", "Loki", "Heimdall"],
-    //     correct: 0, // 0 = Thor
-    //     result: false
-    // },
-    // {   // 7
-    //     text: "Who is a member of the Fantastic Four?",
-    //     answers: ["Tony Stark", "Johnny Storm", "Bruce Banner", "Steven Strange"],
-    //     correct: 1, // 1 = Johnny Storm
-    //     result: false
-    // },
-    // {   // 8
-    //     text: "What were Wolverine's claws made of originally?",
-    //     answers: ["Iron", "Bone", "Adamantium", "He did not have claws when he was born!"],
-    //     correct: 1, // 1 = bone
-    //     result: false
-    // },
-    // {   // 9
-    //     text: "What makes Red Hulk stronger?",
-    //     answers: ["Anger", "Cold", "Electicity", "Heat"],
-    //     correct: 3, // 3 = heat
-    //     result: false
-    // },
-    // {   // 10
-    //     text: "What is Hulk's real name?",
-    //     answers: ["Peter Parker", "Tony Stark", "Bruce Banner", "Viktor Von Doom"],
-    //     correct: 2, // 2 = Bruce Banner
-    //     result: false
-    // }
+    ,
+    {   // 2
+        text: "Who is Peter Parker's first love?",
+        answers: ["Kitty Pryde", "Betty Brant", "Mary Jane", "Gwen Stacy"],
+        correct: 3, // 3 = Gwen Stacy
+        result: false,
+        background: "<img src='images/PeterParker.png' class='js-feedback-image' alt='Peter Parker' />",
+        detail: "Spider-Man writers and fans often debate whether Peter's <strong>one true love</strong> is Gwen Stacy, or Mary Jane Watson (Peter's later girlfriend and wife). Stories published long after her death indicate that Gwen still holds a special place in his heart."
+    },
+    {   // 4
+        text: "Who is part of the Marvel Illuminati?",
+        answers: ["Doctor Strange", "Black Panther", "Dr. Bruce Banner", "Magneto"],
+        correct: 0, // 0 = Doctor Strange
+        result: false,
+        background: "<img src='images/illuminati.png' class='js-feedback-image' alt='Marvel Illuminati' />",
+        detail: "The Illuminati are composed of Iron Man (representing the Avengers), Mister Fantastic (representing the Fantastic Four), Namor (representing Atlantis), Black Bolt (representing the Inhumans), Professor Xavier (representing the X-Men) and Doctor Strange (Sorcerer Supreme of Earth)."
+    },
+    {   // 5
+        text: "Who wears the Eye of Agamotto?",
+        answers: ["Iron Man", "The Ancient One", "Baron Mordo", "Dr. Strange"],
+        correct: 3, // 3 = Doctor Strange
+        result: false,
+        background: "<img src='images/agamoto.png' class='js-feedback-image' alt='Eye of Agamoto' />",
+        detail: "The Eye's origins are currently unknown, but there are theories of how it came into existence. Some believe that it was discovered by Agamotto among the seas and stars, where it had drifted for ages. Others claim that it was created by Agamotto himself."
+    },
+    {   // 6
+        text: "Who is the son of Odin?",
+        answers: ["Thor", "Hulk", "Loki", "Heimdall"],
+        correct: 0, // 0 = Thor
+        result: false,
+        background: "<img src='images/odin.png' class='js-feedback-image' alt='Odin, the AllFather' />",
+        detail: "Lee and Kirby included Thor in The Avengers #1 (Sept. 1963) as a founding member of the superhero team. The character has since appeared in every subsequent volume of the series."
+    },
+    {   // 7
+        text: "Who is a member of the Fantastic Four?",
+        answers: ["Tony Stark", "Johnny Storm", "Bruce Banner", "Steven Strange"],
+        correct: 1, // 1 = Johnny Storm
+        result: false,
+        background: "<img src='images/FF.png' class='js-feedback-image' alt='Fantastic Four' />",
+        detail: "As the first superhero team title produced by Marvel Comics, it formed a cornerstone of the company's 1960s rise from a small division of a publishing company to a pop culture conglomerate. The title would go on to showcase the talents of comics creators such as Roy Thomas, John Buscema, and is one of several Marvel titles originating in the Silver Age of Comic Books that was continuously published through 2015"
+    },
+    {   // 8
+        text: "What were Wolverine's claws made of originally?",
+        answers: ["Iron", "Bone", "Adamantium", "He did not have claws when he was born!"],
+        correct: 1, // 1 = bone
+        result: false,
+        background: "<img src='images/claws.png' class='js-feedback-image' alt='Wolverine claws' />",
+        detail: "Wolverine is typical of the many tough antiheroes that emerged in American popular culture after the Vietnam War; his willingness to use deadly force and his brooding nature became standard characteristics for comic book antiheroes by the end of the 1980s."
+    },
+    {   // 9
+        text: "What makes Red Hulk stronger?",
+        answers: ["Anger", "Gamma Radiation", "Electicity", "Heat"],
+        correct: 1, // 1 = Gamma Radiation
+        result: false,
+        background: "<img src='images/redhulk.png' class='js-feedback-image' alt='Red Hulk' />",
+        detail: "The Red Hulk can emit heat at will from his eyes during non-enraged periods, and can augment power levels by absorbing various types of energy, such as gamma radiation and the Power Cosmic. Red Hulk's body temperature rises with his anger and causes him to weaken when it becomes too intense."
+    },
+    {   // 10
+        text: "What is Hulk's real name?",
+        answers: ["Peter Parker", "Tony Stark", "Bruce Banner", "Viktor Von Doom"],
+        correct: 2, // 2 = Bruce Banner
+        result: false,
+        background: "<img src='images/hulk.png' class='js-feedback-image' alt='The Hulk' />",
+        detail: "Lee stated that the Hulk's creation was inspired by a combination of Frankenstein and Dr. Jekyll and Mr. Hyde. He has two main catchphrases: &#8220;Hulk is strongest one there is!&#8222 and the better-known &#8220;HULK SMASH!&#8222"
+    }
     ],
     currentQuestion: 0,
     currentQuizState: "startQuiz", // values: startQuiz = start quiz / showQuiz/ IncorrectAnswer / endQuiz
