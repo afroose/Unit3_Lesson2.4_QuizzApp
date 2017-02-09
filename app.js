@@ -21,7 +21,7 @@ var state = {
         correct: 0, // 0 = Jack Kirby
         result: false,
         background: "<img src='images/marvel-comics-1.jpg' class='js-feedback-image' alt='Marvel Comics Nber 1' />",
-        detail: "In the 1960s, Jack Kirby and Stanlee co-created many of the Marvel characters, including the Fantastic Four, the X-Men and the Hulk."
+        detail: "In the 1960s, Jack Kirby and Stan Lee co-created many of the Marvel characters, including the Fantastic Four, the X-Men and the Hulk."
 
     },
     {   // 1
