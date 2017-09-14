@@ -99,7 +99,15 @@ var state = {
         result: false,
         background: "<img src='images/hulk.png' class='js-feedback-image' alt='The Hulk' />",
         detail: "Lee stated that the Hulk's creation was inspired by a combination of Frankenstein and Dr. Jekyll and Mr. Hyde. He has two main catchphrases: &#8220;Hulk is strongest one there is!&#8222 and the better-known &#8220;HULK SMASH!&#8222"
-    }
+    },
+    {   // 11
+        text: "Who is a co-founder of Microsoft",
+        answers: ["Bill Gates", "Tony Stark", "Steve Jobs", "Heat"],
+        correct: 0, //0=Bill Gates,
+        result: false,
+        background: "<img src='images/microsoft.png' class='js-feedback-image' alt='Microsoft logo' />",
+        detail: "Microsoft was founded by Paul Allen and Bill Gates on April 4, 1975, to develop and sell BASIC interpreters for the Altair 8800."
+    },
     ],
     currentQuestion: 0,
     currentQuizState: "startQuiz", // values: startQuiz = start quiz / showQuiz/ IncorrectAnswer / endQuiz
@@ -107,7 +115,6 @@ var state = {
 }
 
 // Quiz functions
-
 
 // 2 - functions for updating state during game progress
 
@@ -220,6 +227,8 @@ $('.js-check-answer').click(function (event) {
     event.preventDefault(); // do not submit yet
     // add triggered functions
     // check function - the answer selected has to match the "correct answer" from the question array
+    var unParsedAnswer = $('input[type=radio]:checked', '#hero-quizz-form').val();
+    console.log(unParsedAnswer)
     var selectedAnswer = parseInt($('input[type=radio]:checked', '#hero-quizz-form').val()); // use parseInt else value returned is string
     if(!isNaN(selectedAnswer)){checkQuestion(state, selectedAnswer, $('.js-question-fieldset'));}; 
     // Check question number vs length of array question - load new questions or show reults
